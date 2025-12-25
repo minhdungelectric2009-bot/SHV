@@ -7,13 +7,11 @@
     <style>
         body { margin: 0; overflow: hidden; background-color: #000; font-family: 'Times New Roman', serif; }
         
-        /* --- UI CHÍNH (Cây thông) --- */
         #ui-layer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 10;
             display: flex; flex-direction: column; align-items: center;
-            opacity: 0; /* Ẩn lúc đầu */
-            transition: opacity 3s ease; /* Hiện lên từ từ */
+            opacity: 0; transition: opacity 3s ease; 
         }
         
         h1 {
@@ -56,13 +54,10 @@
         }
 
         .gift-container {
-            width: 120px; height: 120px;
-            position: relative;
-            transform-style: preserve-3d;
-            cursor: pointer;
+            width: 120px; height: 120px; position: relative;
+            transform-style: preserve-3d; cursor: pointer;
             animation: floatGift 3s ease-in-out infinite;
-            transition: all 1s ease;
-            margin-top: -50px; 
+            transition: all 1s ease; margin-top: -50px; 
         }
         
         @keyframes floatGift { 0%, 100% { transform: translateY(0) rotateY(0deg); } 50% { transform: translateY(-15px) rotateY(5deg); } }
@@ -70,8 +65,7 @@
         .face {
             position: absolute; width: 120px; height: 120px;
             background: linear-gradient(45deg, #b30000, #ff1a1a);
-            border: 2px solid #800000;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            border: 2px solid #800000; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
         }
         .face::before { content: ''; position: absolute; width: 25px; height: 100%; left: 47.5px; background: linear-gradient(to right, #ffd700, #ffec8b, #ffd700); box-shadow: 0 0 5px #ffd700; }
         .face::after { content: ''; position: absolute; width: 100%; height: 25px; top: 47.5px; background: linear-gradient(to bottom, #ffd700, #ffec8b, #ffd700); box-shadow: 0 0 5px #ffd700; }
@@ -83,16 +77,13 @@
         .bottom { transform: rotateX(-90deg) translateZ(60px); }
         
         .lid-container {
-            position: absolute; width: 120px; height: 120px;
-            top: 0; left: 0;
-            transform-style: preserve-3d;
-            transform: translateZ(60px);
+            position: absolute; width: 120px; height: 120px; top: 0; left: 0;
+            transform-style: preserve-3d; transform: translateZ(60px);
             transition: transform 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
         .face.top { 
             transform: rotateX(90deg) translateZ(60px); 
-            background: linear-gradient(45deg, #d32f2f, #ff5252);
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #d32f2f, #ff5252); box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
         }
         .bow {
             position: absolute; top: -30px; left: 35px;
@@ -100,54 +91,35 @@
             transform: translateZ(61px);
         }
 
-        .gift-open .lid-container {
-            transform: translateZ(60px) rotateX(110deg) translateY(-60px) translateZ(-60px); 
-        }
-        .gift-open .gift-container {
-            animation: none; 
-            transform: translateY(200px) scale(0.8) rotateX(20deg); 
-            opacity: 0; 
-        }
+        .gift-open .lid-container { transform: translateZ(60px) rotateX(110deg) translateY(-60px) translateZ(-60px); }
+        .gift-open .gift-container { animation: none; transform: translateY(200px) scale(0.8) rotateX(20deg); opacity: 0; }
         
-        /* [FIX] Đẩy chữ click-hint xuống thấp hơn */
         .click-hint {
-            margin-top: 150px; 
-            color: #ffd700; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
+            margin-top: 150px; color: #ffd700; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
             animation: pulse 2s infinite; font-weight: bold; text-shadow: 0 0 10px #ffd700;
-            transition: opacity 0.5s; 
-            text-align: center;
+            transition: opacity 0.5s; text-align: center;
         }
 
         .sparkles {
             position: absolute; top: 50%; left: 50%; width: 0; height: 0;
             box-shadow: 0 0 50px 20px #ffd700, 0 0 100px 40px #ffec8b, 0 0 150px 60px #ffffff;
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0);
-            transition: all 1s ease-out;
-            z-index: -1; 
+            opacity: 0; transform: translate(-50%, -50%) scale(0);
+            transition: all 1s ease-out; z-index: -1; 
         }
-        .gift-open .sparkles {
-            opacity: 0.8;
-            transform: translate(-50%, -60%) scale(1); 
-        }
+        .gift-open .sparkles { opacity: 0.8; transform: translate(-50%, -60%) scale(1); }
 
-        /* --- SLIDE CHỮ --- */
         .slide-text {
             position: absolute; width: 90%; text-align: center;
-            font-size: 24px; line-height: 1.6;
-            color: #fceea7; 
+            font-size: 32px; line-height: 1.6; color: #fceea7; 
             text-shadow: 0 1px 2px rgba(0,0,0,0.8), 0 0 15px rgba(252, 238, 167, 0.5);
-            opacity: 0;
-            transform: scale(0.9) translateY(20px);
-            transition: all 1.5s ease-in-out;
-            font-family: 'Times New Roman', serif;
+            opacity: 0; transform: scale(0.9) translateY(20px);
+            transition: all 1.5s ease-in-out; font-family: 'Times New Roman', serif;
         }
         
         .active-slide { opacity: 1; transform: scale(1) translateY(0); }
         .exit-slide { opacity: 0; transform: scale(1.1) translateY(-30px); }
 
         @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
-
     </style>
 
     <script type="importmap">
@@ -178,39 +150,13 @@
         </div>
         <div class="click-hint">🎁 Bấm cái nơ để mở quà nha mấy con giời 🎁</div>
 
-        <div class="slide-text" id="slide1" style="font-size: 50px; font-weight: bold;">
-            Ta đaaa...
-        </div>
-
-        <div class="slide-text" id="slide2" style="font-size: 26px;">
-            Món quà này tuy cũng chỉ là<br>
-            <span style="color: #ff9999; font-weight: bold;">"vật chất online"</span>
-        </div>
-
-        <div class="slide-text" id="slide3" style="font-size: 30px; font-style: italic;">
-            nhưng mà..
-        </div>
-
-        <div class="slide-text" id="slide4" style="font-size: 24px;">
-            Vậy mới đúng là tinh thần của câu lạc bộ<br>
-            <span style="color: #66ff66; font-weight: bold;">"khoa học"</span> chứ! 🧪
-        </div>
-
-        <div class="slide-text" id="slide5" style="font-size: 22px;">
-            Cảm ơn bạn đã chọn <b>SCIENCE Hoa Vang 20</b><br>
-            là bến đỗ cho hành trình cùng<br>
-            <span style="color: #ffff99;">"ngôi trường làng"</span> này.
-        </div>
-
-        <div class="slide-text" id="slide6" style="font-size: 20px;">
-            Cảm ơn bạn đã chọn đồng hành cùng <b>SHV20</b><br>
-            thực hiện những khao khát được tìm tòi, học hỏi<br>
-            dẫu trong lòng đôi lúc không ủng hộ ước mơ của chính mình.
-        </div>
-
-        <div class="slide-text" id="slide7" style="font-size: 45px; font-weight: bold; color: #ff3333; text-shadow: 0 0 20px red;">
-            🎄 Giáng sinh vui vẻe 🎄
-        </div>
+        <div class="slide-text" id="slide1" style="font-size: 60px; font-weight: bold;">Ta đaaa...</div>
+        <div class="slide-text" id="slide2" style="font-size: 32px;">Món quà này tuy cũng chỉ là<br><span style="color: #ff9999; font-weight: bold; font-size: 36px;">"vật chất online"</span></div>
+        <div class="slide-text" id="slide3" style="font-size: 36px; font-style: italic;">nhưng mà..</div>
+        <div class="slide-text" id="slide4" style="font-size: 28px;">Vậy mới đúng là tinh thần của câu lạc bộ<br><span style="color: #66ff66; font-weight: bold; font-size: 34px;">"khoa học"</span> chứ! 🧪</div>
+        <div class="slide-text" id="slide5" style="font-size: 26px;">Cảm ơn bạn đã chọn <b>SCIENCE Hoa Vang 20</b><br>là bến đỗ cho hành trình cùng<br><span style="color: #ffff99; font-size: 30px;">"ngôi trường làng"</span> này.</div>
+        <div class="slide-text" id="slide6" style="font-size: 24px;">Cảm ơn bạn đã chọn đồng hành cùng <b>SHV20</b><br>thực hiện những khao khát được tìm tòi, học hỏi<br>dẫu trong lòng đôi lúc không ủng hộ ước mơ của chính mình.</div>
+        <div class="slide-text" id="slide7" style="font-size: 55px; font-weight: bold; color: #ff3333; text-shadow: 0 0 20px red;">🎄 Giáng sinh vui vẻe 🎄</div>
     </div>
 
     <div id="ui-layer">
@@ -246,46 +192,24 @@
             
             container.classList.add('gift-open');
             introLayer.classList.add('gift-open'); 
-            
-            if (clickHint) {
-                clickHint.style.display = 'none';
-            }
+            if (clickHint) clickHint.style.display = 'none';
 
-            // Timeline slide (Tính toán thời gian để đọc kịp)
-            // Slide 1: Ta daaa (Ngắn)
             setTimeout(() => playSlide('slide1', 2000), 1000); 
-            
-            // Slide 2: Vật chất online (Vừa) -> Hiện lúc 1s+2s = 3s
             setTimeout(() => playSlide('slide2', 4000), 3000); 
-            
-            // Slide 3: nhưng mà (Ngắn) -> Hiện lúc 3s+4s = 7s
             setTimeout(() => playSlide('slide3', 2000), 7000);
-            
-            // Slide 4: Tinh thần khoa học (Vừa) -> Hiện lúc 7s+2s = 9s
             setTimeout(() => playSlide('slide4', 4000), 9000);
-
-            // Slide 5: Bến đỗ (Dài) -> Hiện lúc 9s+4s = 13s
             setTimeout(() => playSlide('slide5', 6000), 13000);
-
-            // Slide 6: Đồng hành (Rất dài) -> Hiện lúc 13s+6s = 19s
             setTimeout(() => playSlide('slide6', 8000), 19000);
-
-            // Slide 7: Giáng sinh vui vẻ (Chốt) -> Hiện lúc 19s+8s = 27s
             setTimeout(() => playSlide('slide7', 4000), 27000);
 
-            // Kết thúc intro -> Vào Web chính (Tổng = 27s + 4s = 31s)
             setTimeout(() => {
                 const uiLayer = document.getElementById('ui-layer');
                 const webcamContainer = document.getElementById('webcam-container');
-                
                 introLayer.style.transition = "opacity 3s ease-in-out";
                 introLayer.style.opacity = 0;
-                
                 uiLayer.style.opacity = 1;
                 webcamContainer.style.opacity = 0.7;
-
                 setTimeout(() => { introLayer.remove(); }, 3000);
-
             }, 31000); 
         }
 
@@ -295,32 +219,34 @@
             setTimeout(() => {
                 el.classList.remove('active-slide');
                 el.classList.add('exit-slide'); 
-            }, duration - 1000); // Ẩn sớm 1s để chuyển cảnh mượt
+            }, duration - 1000); 
         }
 
         // ==========================================
         // MAIN 3D CODE
         // ==========================================
         const CONFIG = {
-            count: 800,           
+            count: 900,           
             dustCount: 300,        
             treeHeight: 35,
             treeRadius: 12,
             colors: { gold: 0xffe861, emerald: 0x2bfa72, ruby: 0xff2a2a },
-            
             fixedImages: [
-                'https://i.postimg.cc/1fVk8Bxg/anh1.jpg',
-                'https://i.postimg.cc/GHTW4K0D/anh2.jpg',
-                'https://i.postimg.cc/3d0sk1Mm/anh3.jpg',
-                'https://i.postimg.cc/rKRBDj61/anh4.jpg',
-                'https://i.postimg.cc/F7kMYptj/anh5.jpg',
-                'https://i.postimg.cc/ZCvGWHkx/anh6.jpg'
+                'https://i.postimg.cc/mhRbvhnY/IMG-9068.jpg',
+                'https://i.postimg.cc/DmF29mN5/IMG-9074.jpg',
+                'https://i.postimg.cc/nMZHyMW7/IMG-9088.jpg',
+                'https://i.postimg.cc/c6Zsp6zw/IMG-9089.jpg',
+                'https://i.postimg.cc/5j3xbbcB/z7153781369571-4a8850fe6d2d8a5ee263390e9fe7a157.jpg',
+                'https://i.postimg.cc/MXDWqqk5/z7153781459184-40e366aa67ec34d71769e5946e343f15.jpg',
+                'https://i.postimg.cc/Sjrykk0r/z7153784456535-460e24e56a8defed17a56234a8dc3831.jpg',
+                'https://i.postimg.cc/9zpWCC3g/z7153784971670-a629dc49d30696ec52ff9de3da0d54cf.jpg',
+                'https://i.postimg.cc/14H9ssxL/z7153798241244-163eb995e31e7e3334f7da5a9bcf6f7f.jpg'
             ]
         };
 
         const SENSITIVITY = {
-            speed: { normal: 0.125, focus: 0.04 },
-            range: { horizontal: 3, vertical: 3 }
+            speed: { normal: 0.35, focus: 0.05 },
+            range: { horizontal: 6, vertical: 6 }
         };
 
         const BLOOM_LAYER = 0; 
@@ -439,7 +365,8 @@
                 stencil: false 
             });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); 
+            // [FIX ẢNH MỜ] Tăng PixelRatio lên tối đa
+            renderer.setPixelRatio(window.devicePixelRatio); 
             
             renderer.toneMapping = THREE.ACESFilmicToneMapping;
             renderer.toneMappingExposure = 1.2; 
@@ -458,12 +385,13 @@
             mainGroup.add(innerLight);
 
             const renderScene = new RenderPass(scene, camera);
+            // [FIX HẠT PHÁT SÁNG & ẢNH SÁNG]
             const bloomPass = new UnrealBloomPass(
                 new THREE.Vector2(window.innerWidth/2, window.innerHeight/2), 
                 1.5, 0.4, 0.85
             );
-            bloomPass.threshold = 0.2; 
-            bloomPass.strength = 0.8; 
+            bloomPass.threshold = 0.75; 
+            bloomPass.strength = 1.2;
             bloomPass.radius = 0.5;
 
             composer = new EffectComposer(renderer);
@@ -549,13 +477,14 @@
             new TWEEN.Tween(group.scale).to({ x:0.8, y:0.8, z:0.8 }, 1000).easing(TWEEN.Easing.Elastic.Out).start();
         }
 
+        // [FIX HẠT PHÁT SÁNG] Tăng emissiveIntensity cực mạnh
         function createObjects() {
             const gemGeo = new THREE.IcosahedronGeometry(0.35, 0); 
             const boxGeo = new THREE.BoxGeometry(0.30, 0.30, 0.30);
             
-            const matGold = new THREE.MeshPhongMaterial({ color: CONFIG.colors.gold, shininess: 80, emissive: 0xffaa00, emissiveIntensity: 0.5 });
-            const matEmerald = new THREE.MeshPhongMaterial({ color: CONFIG.colors.emerald, shininess: 80, emissive: 0x00ff44, emissiveIntensity: 0.8 });
-            const matRuby = new THREE.MeshPhongMaterial({ color: CONFIG.colors.ruby, shininess: 80, emissive: 0xff0000, emissiveIntensity: 0.9 });
+            const matGold = new THREE.MeshPhongMaterial({ color: CONFIG.colors.gold, shininess: 80, emissive: 0xffaa00, emissiveIntensity: 2.0 });
+            const matEmerald = new THREE.MeshPhongMaterial({ color: CONFIG.colors.emerald, shininess: 80, emissive: 0x00ff44, emissiveIntensity: 2.5 });
+            const matRuby = new THREE.MeshPhongMaterial({ color: CONFIG.colors.ruby, shininess: 80, emissive: 0xff0000, emissiveIntensity: 3.0 });
 
             for (let i = 0; i < CONFIG.count; i++) {
                 let mesh;
